@@ -14,9 +14,45 @@ app.get('/', function(req, res) {
     res.send('Todo API root');
 });
 
-// GET /todos
-app.get('/todos', function(req, res){
-    res.json(todos);
+// // GET /todos
+// app.get('/todos', function(req, res){
+//     var queryParams = req.query;
+//     var filteredTodos = todos;
+
+//     // if has property && completed === 'true'
+//     //  filteredTodos = _.where(filteredTodos, ?)
+//     // else if 
+//     if (!_.isEmpty(queryParams) && queryParams.completed === 'true')
+//     {
+//         queryParams.completed = true;
+//         filteredTodos = _.where(todos,queryParams);
+//     } 
+//     else if (!_.isEmpty(queryParams) && queryParams.completed === 'false') 
+//     {
+//         queryParams.completed = false;
+//         filteredTodos = _.where(todos,queryParams);
+//     } 
+//     res.json(filteredTodos);
+// });
+
+// GET /todos?completed=true
+app.get('/todos', function (req, res) {
+    var queryParams = req.query;
+    var filteredTodos = todos;
+
+    if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'true') {
+        filteredTodos = _.where(filteredTodos, {completed: true});
+    } else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false') {
+        filteredTodos = _.where(filteredTodos, {completed: false});
+    }
+
+    if (queryParams.hasOwnProperty('description') && queryParams.description.trim().length > 0) {
+        filteredTodos = _.filter(filteredTodos, function(element){
+            return element.description.toLowerCase().indexOf(queryParams.description.toLowerCase()) >= 0;
+        });
+    }
+
+    res.json(filteredTodos);
 });
 
 // GET /todos/:id
