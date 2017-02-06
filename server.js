@@ -39,36 +39,7 @@ app.get('/todos', function (req, res) {
     }, function (e) {
         res.status(500).json(e);
     });
-    // var filteredTodos = todos;
 
-    // if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'true') {
-    //     filteredTodos = _.where(filteredTodos, { completed: true });
-    // } else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false') {
-    //     filteredTodos = _.where(filteredTodos, { completed: false });
-    // }
-
-    // if (queryParams.hasOwnProperty('description') && queryParams.description.trim().length > 0) {
-    //     filteredTodos = _.filter(filteredTodos, function (element) {
-    //         return element.description.toLowerCase().indexOf(queryParams.description.toLowerCase()) >= 0;
-    //     });
-    // }
-
-    // res.json(filteredTodos);
-    // .then(function () {
-    //     // return Todo.findById(1);
-    //     return Todo.findAll({
-    //         where: {
-    //             completed: false
-    //         }
-    //     });
-    // }).then(function (todos) {
-    // if (todos) {
-    //     todos.forEach(function (todo) {
-    //         console.log(todo.toJSON());
-    //     });
-    // } else {
-    //     console.log('No todo found');
-    // }
 });
 
 // GET /todos/:id
